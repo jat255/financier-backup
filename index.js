@@ -30,8 +30,6 @@ const filename = `${timestamp}_financier_backup.json`;
     await page.goto(url);
     spinner.succeed();
 
-    await page.screenshot({ path: 'example.png' });
-
     spinner = ora(`Waiting for page to load`).start();
     // when div.budgets is present, we can check for login/logout
     const BUDGETS_SELECTOR = 'css=div.budgets';
