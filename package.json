@@ -1,0 +1,17 @@
+{
+  "name": "financier-backup",
+  "version": "1.0.0",
+  "description": "Backup financier data using playwright",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Joshua Taillon",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "moment": "^2.29.1",
+    "ora": "^5.4.0",
+    "playwright": "^1.10.0"
+  }
+}
