@@ -11,4 +11,5 @@ if [ -z ${DESTINATION+x} ]; then
 else 
   echo "Moving backup file to ${DESTINATION}"
   mv *backup.json "${DESTINATION}"
+  gzip "${DESTINATION}"*.json
 fi
