@@ -5,10 +5,11 @@ const ora = require('ora');
 const moment = require('moment');
 var spinner;
 
-const url = 'https://app.financier.io';
+const url = process.env.FINANCIER_URL;
 const user = process.env.FINANCIER_USER;
 const pass = process.env.FINANCIER_PASS;
 const budgetId = process.env.FINANCIER_BUDGET_ID;
+const ignoreSSL = process.env.IGNORE_SSL === "true";
 const timestamp = moment().format('YYYY-MM-DD[T]HHmm');
 const filename = `${timestamp}_financier_backup.json`;
 
@@ -20,7 +21,8 @@ const filename = `${timestamp}_financier_backup.json`;
             acceptDownloads: true,
             headless: true,
             downloadsPath: '.',
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            ignoreHTTPSErrors: ignoreSSL 
         }
     );
     const page = await browser.newPage();
@@ -68,7 +70,7 @@ const filename = `${timestamp}_financier_backup.json`;
     try {
         // wait for sync with six minute timeout
         let a = performance.now();
-        await page.waitForSelector(SYNC_SELECTOR, {timeout: 720000});
+        await page.waitForSelector(SYNC_SELECTOR, {timeout: 7200000});
         let b = performance.now();
         spinner.succeed(`Budgets synced in ${parseInt((b-a)/1000)}s`);
     }
